@@ -1,17 +1,16 @@
 # deploy-gitlab-on-minikube
 
-~~~
 ### Install minikube
+
+~~~
 https://github.com/kubernetes/minikube/releases
+~~~
 
 
 ### Add ip to hostfile
 
-
 ~~~
 echo $(minikube ip)" gitlab"
-
-echo $(minikube ip)" helloworld.local"
 ~~~
 
 ### Create ingress controller
