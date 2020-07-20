@@ -77,11 +77,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: web-claim0
   namespace: gitlab
-
 spec:
-  selector: 
-    matchLabels: 
-      type: web-claim0
   accessModes:
     - ReadWriteOnce
   resources:
@@ -112,9 +108,6 @@ metadata:
   namespace: gitlab
 
 spec:
-  selector: 
-    matchLabels: 
-      type: web-claim1
   accessModes:
     - ReadWriteOnce
   resources:
@@ -142,11 +135,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: web-claim2
   namespace: gitlab
-
 spec:
-  selector: 
-    matchLabels: 
-      type: web-claim2
   accessModes:
     - ReadWriteOnce
   resources:
@@ -175,9 +164,6 @@ metadata:
   namespace: gitlab
 
 spec:
-  selector: 
-    matchLabels: 
-      type: web-claim3
   accessModes:
     - ReadWriteOnce
   resources:
