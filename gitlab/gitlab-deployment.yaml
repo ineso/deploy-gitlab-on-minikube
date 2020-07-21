@@ -30,143 +30,24 @@ spec:
         ports:
         - containerPort: 22
         - containerPort: 80
+        - containerPort: 4567
         resources: {}
         volumeMounts:
-        - mountPath: /etc/gitlab
-          name: web-claim0
-        - mountPath: /var/opt/gitlab/git-data/.ssh/
-          name: web-claim1
-        - mountPath: /var/opt/gitlab/git-data/repositories/
-          name: web-claim2
-        - mountPath: /var/opt/gitlab/backups
-          name: web-claim3
+          - mountPath: /var/opt/gitlab
+            name:  gitlab-pv-claim-1
+          - mountPath: /var/log/gitlab
+            name: gitlab-pv-claim-2
+          - mountPath: /etc/gitlab
+            name: gitlab-pv-claim-3        
       restartPolicy: Always
       volumes:
-      - name: web-claim0
-        persistentVolumeClaim:
-          claimName: web-claim0
-      - name: web-claim1
-        persistentVolumeClaim:
-          claimName: web-claim1
-      - name: web-claim2
-        persistentVolumeClaim:
-          claimName: web-claim2
-      - name: web-claim3
-        persistentVolumeClaim:
-          claimName: web-claim3
-
+        - name: gitlab-pv-claim-1
+          persistentVolumeClaim:
+            claimName: gitlab-pv-claim-1
+        - name: gitlab-pv-claim-2
+          persistentVolumeClaim:
+            claimName: gitlab-pv-claim-2
+        - name: gitlab-pv-claim-3
+          persistentVolumeClaim:
+            claimName: gitlab-pv-claim-3
 status: {}
----
-
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: web-claim0
-  labels:
-    type: web-claim0
-spec:
-  accessModes:
-    - ReadWriteOnce
-  capacity:
-    storage: 2Gi
-  hostPath:
-    path: /data/gitlab/
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: web-claim0
-  namespace: gitlab
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 2Gi
-
----
-
-
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: web-claim1
-  labels:
-    type: web-claim1
-spec:
-  accessModes:
-    - ReadWriteOnce
-  capacity:
-    storage: 2Gi
-  hostPath:
-    path: /data/gitlab/git-data/.ssh
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: web-claim1
-  namespace: gitlab
-
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 2Gi
----
-
-
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: web-claim2
-  labels:
-    type: web-claim2
-spec:
-  accessModes:
-    - ReadWriteOnce
-  capacity:
-    storage: 2Gi
-  hostPath:
-    path: /data/gitlab/git-data/repositories
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: web-claim2
-  namespace: gitlab
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 2Gi
----
-
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: web-claim3
-  labels:
-    type: web-claim3
-spec:
-  accessModes:
-    - ReadWriteOnce
-  capacity:
-    storage: 2Gi
-  hostPath:
-    path: /data/gitlab/backups
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: web-claim3
-  namespace: gitlab
-
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 2Gi
----

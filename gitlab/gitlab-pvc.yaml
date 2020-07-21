@@ -1,0 +1,96 @@
+
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: gitlab-pv-volume-1
+  namespace: gitlab
+  labels:
+    type: local
+    app: gitlab
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/mnt/sda1/data/gitlab/pv1"
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: gitlab-pv-volume-2
+  namespace: gitlab
+  labels:
+    type: local
+    app: gitlab
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/mnt/sda1/data/gitlab/pv2"
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: gitlab-pv-volume-3
+  namespace: gitlab
+  labels:
+    type: local
+    app: gitlab
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/mnt/sda1/data/gitlab/pv3"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: gitlab-pv-claim-1
+  namespace: gitlab
+  labels:
+    app: gitlab
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: gitlab-pv-claim-2
+  namespace: gitlab
+  labels:
+    app: postgres
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: gitlab-pv-claim-3
+  namespace: gitlab
+  labels:
+    app: postgres
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
