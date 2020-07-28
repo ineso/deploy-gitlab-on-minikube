@@ -16,6 +16,7 @@ spec:
       labels:
         name: gitlab-runner
     spec:
+      serviceAccountName: gitlab
       containers:
       - name: gitlab-runner-kubernetes
         image: gitlab/gitlab-runner:latest
@@ -83,8 +84,8 @@ spec:
           value: "/cache"
         - name: DOCKER_DNS_SEARCH
           value: "gitlab.svc.cluster.local"
-        - name: DOCKER_DNS
-          value: "10.0.0.10"
+        #- name: DOCKER_DNS
+         # value: "10.0.0.10"
         command: ["/bin/bash"]
         args: ["-c", "gitlab-runner register docker; /usr/bin/dumb-init /entrypoint run --user=gitlab-runner --working-directory=/home/gitlab-runner"]
       restartPolicy: Always
